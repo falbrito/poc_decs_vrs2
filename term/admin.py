@@ -7,7 +7,8 @@ from term.models import *
 from term.forms import IdentifierForm, IdentifierQualifForm
 
 
-# class TermInline(admin.TabularInline):
+
+# Formulario para Descricao do termo
 class DescriptionInline(admin.StackedInline):
     model = Description
     extra = 0
@@ -23,6 +24,17 @@ class PreviousIndexingListInline(admin.TabularInline):
     extra = 0
     classes = ['collapse']
 
+class ConceptListInline(admin.StackedInline):
+    model = ConceptList
+    extra = 0
+    classes = ['collapse']
+
+class TermListInline(admin.StackedInline):
+    model = TermList
+    extra = 0
+    classes = ['collapse']
+
+
 class IdentifierForm(admin.ModelAdmin):
 
 	list_display = (
@@ -37,13 +49,14 @@ class IdentifierForm(admin.ModelAdmin):
 			DescriptionInline,
 			TreeNumbersListInline,
 			PreviousIndexingListInline,
+			ConceptListInline,
+			TermListInline,
 
 	]
 
 
 
-
-# class TermInline(admin.TabularInline):
+# Formulario para Descricao do qualificador
 class DescriptionQualifInline(admin.StackedInline):
     model = DescriptionQualif
     extra = 0
@@ -69,6 +82,7 @@ class IdentifierQualifForm(admin.ModelAdmin):
 			DescriptionQualifInline,
 			TreeNumbersListQualifInline,
 	]
+
 
 
 admin.site.register(Identifier, IdentifierForm)
