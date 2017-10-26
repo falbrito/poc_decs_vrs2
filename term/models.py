@@ -66,7 +66,7 @@ class DescriptionQualif(models.Model):
         verbose_name = u'Description of Qualifier'
         verbose_name_plural = u'Descriptions of Qualifier'
 
-    identifier_qualif = models.ForeignKey(IdentifierQualif, blank=False)
+    identifier = models.ForeignKey(IdentifierQualif, blank=False)
 
     language_code = models.CharField(u'Language used for description', choices=LANGUAGE_CODE, max_length=10, blank=True)
 
@@ -83,7 +83,8 @@ class DescriptionQualif(models.Model):
     online_note = models.TextField(u'Online note', max_length=1500, null=True, blank=True)
 
     def __str__(self):
-        return '%s' % (self.qualifier_name)
+        # return '%s' % (self.qualifier_name)
+        return '%s' % (self.id)
 
 
 
