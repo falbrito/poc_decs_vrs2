@@ -36,11 +36,13 @@ class TermListInline(admin.StackedInline):
 
 
 class IdentifierForm(admin.ModelAdmin):
-
 	list_display = (
 					'descriptor_ui',
 					'decs_code',
 		)
+	list_per_page = 20
+	filter_horizontal = ('abbreviation',)
+
 
 	form = IdentifierForm
 
@@ -68,12 +70,12 @@ class TreeNumbersListQualifInline(admin.TabularInline):
     classes = ['collapse']
 
 class IdentifierQualifForm(admin.ModelAdmin):
-
 	list_display = (
 					'qualifier_ui',
 					'decs_code',
 					'abbreviation',
 		)
+	list_per_page = 20
 
 	form = IdentifierQualifForm
 

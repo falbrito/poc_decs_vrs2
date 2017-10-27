@@ -307,7 +307,7 @@ class TermList(models.Model):
     is_permuted_term = models.CharField(u'Is permuted term', choices=YN_OPTION, max_length=1, blank=True)
 
     # LexicalTag
-    lexical_tag =  models.CharField(u'Is permuted term', choices=LEXICALTAG_OPTION, max_length=3, blank=True)
+    lexical_tag =  models.CharField(u'Lexical categories', choices=LEXICALTAG_OPTION, max_length=3, blank=True)
 
     # RecordPreferredTerm
     record_preferred_term = models.CharField(u'Record preferred term', choices=YN_OPTION, max_length=1, blank=True)
