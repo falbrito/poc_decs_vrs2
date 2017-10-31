@@ -40,6 +40,7 @@ class IdentifierForm(admin.ModelAdmin):
 					'descriptor_ui',
 					'decs_code',
 		)
+
 	list_per_page = 15
 	filter_horizontal = ('abbreviation',)
 	search_fields = ['descriptor_ui','decs_code']

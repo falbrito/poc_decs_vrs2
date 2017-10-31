@@ -28,6 +28,7 @@ class IdentifierQualif(models.Model):
     class Meta:
         verbose_name = u'Qualifier'
         verbose_name_plural = u'Qualifiers'
+        ordering = ('abbreviation',)
 
     thesaurus = models.ForeignKey(Thesaurus, null=True, blank=True, default=None)
 
@@ -52,10 +53,6 @@ class IdentifierQualif(models.Model):
     def __str__(self):
         # return '%s' % (self.id)
         return '%s' % (self.abbreviation)
-
-    class Meta:
-        ordering = ('abbreviation',)
-
 
 
 
@@ -113,8 +110,9 @@ class TreeNumbersListQualif(models.Model):
 class Identifier(models.Model):
 
     class Meta:
-        verbose_name = u'Register'
-        verbose_name_plural = u'Registers'
+        verbose_name = u'Descriptor'
+        verbose_name_plural = u'Descriptors'
+        ordering = ('decs_code',)
 
     DESCRIPTOR_CLASS_CODE=(
                 ('1', u'1 - Topical Descriptor'),
@@ -151,8 +149,6 @@ class Identifier(models.Model):
     def __str__(self):
         return '%s' % (self.id)
 
-    class Meta:
-        ordering = ('decs_code',)
 
 
 
