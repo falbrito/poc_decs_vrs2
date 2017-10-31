@@ -151,6 +151,8 @@ class Identifier(models.Model):
     def __str__(self):
         return '%s' % (self.id)
 
+    class Meta:
+        ordering = ('decs_code',)
 
 
 

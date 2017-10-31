@@ -40,9 +40,9 @@ class IdentifierForm(admin.ModelAdmin):
 					'descriptor_ui',
 					'decs_code',
 		)
-	list_per_page = 20
+	list_per_page = 15
 	filter_horizontal = ('abbreviation',)
-
+	search_fields = ['descriptor_ui','decs_code']
 
 	form = IdentifierForm
 
@@ -71,11 +71,12 @@ class TreeNumbersListQualifInline(admin.TabularInline):
 
 class IdentifierQualifForm(admin.ModelAdmin):
 	list_display = (
+					'abbreviation',
 					'qualifier_ui',
 					'decs_code',
-					'abbreviation',
 		)
-	list_per_page = 20
+	list_per_page = 15
+	search_fields = ['qualifier_ui','decs_code','abbreviation']
 
 	form = IdentifierQualifForm
 
