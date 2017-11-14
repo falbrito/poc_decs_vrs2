@@ -5,7 +5,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from multiselectfield import MultiSelectField
 
-from thesaurus.models import Thesaurus
+from .models_thesaurus import Thesaurus
+from .models_qualifiers import *
 
 
 LANGUAGE_CODE=(
@@ -22,92 +23,8 @@ YN_OPTION=(
 
 
 
-# For Qualifier ---------------------------------------------------
-class IdentifierQualif(models.Model):
-
-    class Meta:
-        verbose_name = u'Qualifier'
-        verbose_name_plural = u'Qualifiers'
-        ordering = ('abbreviation',)
-
-    thesaurus = models.ForeignKey(Thesaurus, null=True, blank=True, default=None)
-
-    # QualifierUI
-    qualifier_ui = models.CharField(u'MESH code for Qualifier', max_length=250, null=True, blank=True)
-
-    # BIREME DeCS Code 
-    decs_code = models.CharField(u'DeCS code', max_length=250, null=True, blank=True)
-
-    # Abbreviation
-    abbreviation = models.CharField(u'Abbreviation', max_length=4, null=True, blank=True)
-
-    # DateCreated
-    date_created = models.DateField(u'Date created', null=True, blank=True)
-
-    # DateRevised
-    date_revised =  models.DateField(u'Date revised', null=True, blank=True)
-
-    # DateEstablished
-    date_established = models.DateField(u'Date established', null=True, blank=True)
-
-    def __str__(self):
-        # return '%s' % (self.id)
-        return '%s' % (self.abbreviation)
-
-
-
-# QualifierRecord
-class DescriptionQualif(models.Model):
-
-    class Meta:
-        verbose_name = u'Description of Qualifier'
-        verbose_name_plural = u'Descriptions of Qualifier'
-
-    identifier = models.ForeignKey(IdentifierQualif, blank=False)
-
-    language_code = models.CharField(u'Language used for description', choices=LANGUAGE_CODE, max_length=10, blank=True)
-
-    # QualifierName
-    qualifier_name = models.CharField(u'Qualifier name', max_length=250, blank=False)
-
-    # Annotation
-    annotation = models.TextField(u'Annotation', max_length=1500, null=True, blank=True)
-
-    # HistoryNote
-    history_note = models.TextField(u'History note', max_length=1500, null=True, blank=True)
-
-    # OnlineNote
-    online_note = models.TextField(u'Online note', max_length=1500, null=True, blank=True)
-
-    def __str__(self):
-        # return '%s' % (self.qualifier_name)
-        return '%s' % (self.id)
-
-
-
-
-# Tree numbers for qualifiers
-class TreeNumbersListQualif(models.Model):
-
-    class Meta:
-        verbose_name = u'Tree number for qualifier'
-        verbose_name_plural = u'Tree numbers for qualifiers'
-
-    identifier = models.ForeignKey(IdentifierQualif, blank=False)
-
-    # Tree Number
-    tree_number = models.CharField(u'Tree number', max_length=250, null=True, blank=True)
-
-    def __str__(self):
-        return '%s' % (self.id)
-
-# For Qualifier ---------------------------------------------------
-
-
-
-
 # thesaurus fields
-class Identifier(models.Model):
+class IdentifierDesc(models.Model):
 
     class Meta:
         verbose_name = u'Descriptor'
@@ -153,13 +70,13 @@ class Identifier(models.Model):
 
 
 # Description
-class Description(models.Model):
+class DescriptionDesc(models.Model):
 
     class Meta:
         verbose_name = u'Description'
         verbose_name_plural = u'Descriptions'
 
-    identifier = models.ForeignKey(Identifier, blank=False)
+    identifier = models.ForeignKey(IdentifierDesc, blank=False)
 
     language_code = models.CharField(u'Language used for description', choices=LANGUAGE_CODE, max_length=10, blank=True)
 
@@ -192,13 +109,13 @@ class Description(models.Model):
 
 
 # Tree numbers for descriptors
-class TreeNumbersList(models.Model):
+class TreeNumbersListDesc(models.Model):
 
     class Meta:
         verbose_name = u'Tree number for descriptor'
         verbose_name_plural = u'Tree numbers for descriptors'
 
-    identifier = models.ForeignKey(Identifier, blank=False)
+    identifier = models.ForeignKey(IdentifierDesc, blank=False)
 
     # Tree Number
     tree_number = models.CharField(u'Tree number', max_length=250, null=True, blank=True)
@@ -210,13 +127,13 @@ class TreeNumbersList(models.Model):
 
 
 # Previous Indexing List
-class PreviousIndexingList(models.Model):
+class PreviousIndexingListDesc(models.Model):
 
     class Meta:
         verbose_name = u'Previous Indexing'
         verbose_name_plural = u'Previous Indexing'
 
-    identifier = models.ForeignKey(Identifier, blank=False)
+    identifier = models.ForeignKey(IdentifierDesc, blank=False)
 
     # PreviousIndexing
     previous_indexing = models.CharField(u'Previous indexing', max_length=250, null=True, blank=True)
@@ -228,7 +145,7 @@ class PreviousIndexingList(models.Model):
 
 
 # ConceptList
-class ConceptList(models.Model):
+class ConceptListDesc(models.Model):
 
     class Meta:
         verbose_name = u'Concept'
@@ -241,7 +158,7 @@ class ConceptList(models.Model):
     )
 
 
-    identifier = models.ForeignKey(Identifier, blank=False)
+    identifier = models.ForeignKey(IdentifierDesc, blank=False)
 
     language_code = models.CharField(u'Language used for description', choices=LANGUAGE_CODE, max_length=10, blank=True)
 
@@ -276,7 +193,7 @@ class ConceptList(models.Model):
 
 
 # TermList
-class TermList(models.Model):
+class TermListDesc(models.Model):
 
     class Meta:
         verbose_name = u'Term'
@@ -294,7 +211,7 @@ class TermList(models.Model):
         ('TRD','TRD - Trade name'),
     )
 
-    identifier = models.ForeignKey(Identifier, blank=False)
+    identifier = models.ForeignKey(IdentifierDesc, blank=False)
 
     language_code = models.CharField(u'Language used for description', choices=LANGUAGE_CODE, max_length=10, blank=True)
 
