@@ -38,16 +38,21 @@ class IdentifierDesc(models.Model):
                 ('4', u'4 - Geographic Descriptor'),
     )
 
+    active = models.BooleanField(u'Enabled', default=True, help_text=u'Check to set it to active')
+
     thesaurus = models.ForeignKey(Thesaurus, null=True, blank=True, default=None)
 
     # DescriptorClass
     descriptor_class = models.CharField(u'Descriptor class', choices=DESCRIPTOR_CLASS_CODE, max_length=2, blank=True)
 
-    # DescriptorUI
-    descriptor_ui = models.CharField(u'MESH code', max_length=250, null=True, blank=True)
+    # MESH Descriptor Unique Identifier
+    descriptor_ui = models.CharField(u'MESH Descriptor UI', max_length=250, null=True, blank=True)
 
-    # BIREME DeCS Code 
-    decs_code = models.CharField(u'DeCS code', max_length=250, null=True, blank=True)
+    # BIREME Descriptor Unique Identifier
+    decs_code = models.CharField(u'DeCS Descriptor UI', max_length=250, null=True, blank=True)
+
+    # External Descriptor Unique Identifier
+    external_code = models.CharField(u'External Descriptor UI', max_length=250, null=True, blank=True)
 
     # NLMClassificationNumber
     nlm_class_number = models.CharField(u'NLM classification number', max_length=250, null=True, blank=True)
@@ -232,6 +237,9 @@ class TermListDesc(models.Model):
 
     # String
     term_string = models.CharField(u'String', max_length=250, blank=False)
+
+    # EntryVersion
+    entry_version = models.CharField(u'Entry version', max_length=250, blank=True)
 
     # DateCreated
     date_created = models.DateField(u'Date created', null=True, blank=True)

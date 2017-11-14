@@ -29,13 +29,18 @@ class IdentifierQualif(models.Model):
         verbose_name_plural = u'Qualifiers'
         ordering = ('abbreviation',)
 
+    active = models.BooleanField(u'Enabled', default=True, help_text=u'Check to set it to active')
+
     thesaurus = models.ForeignKey(Thesaurus, null=True, blank=True, default=None)
 
-    # QualifierUI
-    qualifier_ui = models.CharField(u'MESH code for Qualifier', max_length=250, null=True, blank=True)
+    # MESH Qualifier Unique Identifier
+    qualifier_ui = models.CharField(u'MESH Qualifier UI', max_length=250, null=True, blank=True)
 
-    # BIREME DeCS Code 
-    decs_code = models.CharField(u'DeCS code', max_length=250, null=True, blank=True)
+    # BIREME Qualifier Unique Identifier
+    decs_code = models.CharField(u'DeCS Qualifier UI', max_length=250, null=True, blank=True)
+
+    # External Qualifier Unique Identifier
+    external_code = models.CharField(u'External Qualifier UI', max_length=250, null=True, blank=True)
 
     # Abbreviation
     abbreviation = models.CharField(u'Abbreviation', max_length=4, null=True, blank=True)
@@ -146,6 +151,9 @@ class TermListQualif(models.Model):
 
     # String
     term_string = models.CharField(u'String', max_length=250, blank=False)
+
+    # EntryVersion
+    entry_version = models.CharField(u'Entry version', max_length=250, blank=True)
 
     # DateCreated
     date_created = models.DateField(u'Date created', null=True, blank=True)
